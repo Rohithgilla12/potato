@@ -6,7 +6,8 @@ class AppDelegate: FlutterAppDelegate {
   var statusBar: StatusBarController?
   var popover = NSPopover.init()
   override init() {
-    popover.behavior = NSPopover.Behavior.transient //to make the popover hide when the user clicks outside of it
+    // Todo: Remove after dev
+    // popover.behavior = NSPopover.Behavior.transient //to make the popover hide when the user clicks outside of it
   }
 
   override func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:potato/src/init/locator.dart';
+import 'package:potato/src/stores/app_store.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> init() async {
@@ -18,4 +20,10 @@ Future<void> init() async {
     debug: kDebugMode,
     authCallbackUrlHostname: 'login-callback',
   );
+
+  setupLocator();
+
+  final AppStore appStore = locator<AppStore>();
+
+  appStore.auth.listenToAuth();
 }
