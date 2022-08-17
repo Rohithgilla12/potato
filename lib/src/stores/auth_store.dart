@@ -1,5 +1,7 @@
 import 'package:crispin/crispin.dart';
 import 'package:mobx/mobx.dart';
+import 'package:potato/src/data/auth_api.dart';
+import 'package:potato/src/models/auth/index.dart';
 import 'package:potato/src/utils/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -12,6 +14,14 @@ abstract class AuthStoreBase with Store {
 
   @observable
   String? uid;
+
+  @observable
+  UserProfile? userProfile;
+
+  @observable
+  String? name;
+
+  final AuthApi authApi = AuthApi();
 
   @action
   void listenToAuth() {
@@ -44,5 +54,20 @@ abstract class AuthStoreBase with Store {
         redirectTo: 'potato://login-callback',
       ),
     );
+  }
+
+  @action
+  Future<void> getUser(String uid) async {
+    await authApi.getUser(uid);
+  }
+
+  @action
+  Future<void> createInitialProfile() async {
+    userProfile = UserProfile(
+      name: name,
+      email: auth.currentSession!.user!.email!,
+      id: uid!,
+    );
+    await authApi.createProfile(userProfile!);
   }
 }

@@ -39,4 +39,7 @@ Future<void> init() async {
 
   // Hacky way to do for now.
   appStore.auth.uid = auth.currentSession?.user?.id;
+  if (appStore.auth.uid != null) {
+    await appStore.auth.getUser(appStore.auth.uid!);
+  }
 }
