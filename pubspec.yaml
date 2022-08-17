@@ -19,6 +19,8 @@ dependencies:
   get_it: ^7.2.0
   mobx: ^2.0.7+5
   flutter_mobx: ^2.0.6+1
+  crispin: ^1.1.0
+  logger_crispin_transport: ^1.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,10 @@
+import 'package:crispin/crispin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:logger_crispin_transport/logger_crispin_transport.dart';
 import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/stores/app_store.dart';
+import 'package:potato/src/utils/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> init() async {
@@ -25,5 +28,15 @@ Future<void> init() async {
 
   final AppStore appStore = locator<AppStore>();
 
+  // Setup loggers
+  Crispin().addTransport(LoggerCrispinTransport(
+    LoggerCrispinTransportOptions(
+      level: 'info',
+    ),
+  ));
+
   appStore.auth.listenToAuth();
+
+  // Hacky way to do for now.
+  appStore.auth.uid = auth.currentSession?.user?.id;
 }

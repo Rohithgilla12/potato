@@ -5,6 +5,7 @@ import 'package:potato/src/stores/auth_store.dart';
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
+// Don't think we need ro register it, since we access from `AppStore`
   locator.registerLazySingleton<AuthStore>(() => AuthStore());
   locator.registerLazySingleton<AppStore>(() => AppStore());
 }

@@ -15,9 +15,15 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () async {
+          appStore.auth.uid = '123';
+        },
+      ),
       body: Observer(
         builder: (_) {
-          if (appStore.auth.user == null) {
+          if (appStore.auth.uid == null) {
             return Column(
               children: [
                 const Center(
