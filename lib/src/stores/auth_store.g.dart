@@ -32,6 +32,15 @@ mixin _$AuthStore on _AuthStore, Store {
     return _$signUpAsyncAction.run(() => super.signUp(email, password));
   }
 
+  late final _$loginWithMagicLinkAsyncAction =
+      AsyncAction('_AuthStore.loginWithMagicLink', context: context);
+
+  @override
+  Future<void> loginWithMagicLink(String email) {
+    return _$loginWithMagicLinkAsyncAction
+        .run(() => super.loginWithMagicLink(email));
+  }
+
   late final _$_AuthStoreActionController =
       ActionController(name: '_AuthStore', context: context);
 
