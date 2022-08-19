@@ -23,6 +23,7 @@ dependencies:
   logger_crispin_transport: ^1.1.0
   freezed_annotation: ^2.1.0
   json_annotation: ^4.6.0
+  flutter_remix: ^0.0.3
 
 dev_dependencies:
   flutter_test:

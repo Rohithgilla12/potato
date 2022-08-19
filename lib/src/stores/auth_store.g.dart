@@ -55,6 +55,22 @@ mixin _$AuthStore on AuthStoreBase, Store {
     });
   }
 
+  late final _$userProfileFutureAtom =
+      Atom(name: 'AuthStoreBase.userProfileFuture', context: context);
+
+  @override
+  ObservableFuture<UserProfile>? get userProfileFuture {
+    _$userProfileFutureAtom.reportRead();
+    return super.userProfileFuture;
+  }
+
+  @override
+  set userProfileFuture(ObservableFuture<UserProfile>? value) {
+    _$userProfileFutureAtom.reportWrite(value, super.userProfileFuture, () {
+      super.userProfileFuture = value;
+    });
+  }
+
   late final _$signUpAsyncAction =
       AsyncAction('AuthStoreBase.signUp', context: context);
 
@@ -108,7 +124,8 @@ mixin _$AuthStore on AuthStoreBase, Store {
     return '''
 uid: ${uid},
 userProfile: ${userProfile},
-name: ${name}
+name: ${name},
+userProfileFuture: ${userProfileFuture}
     ''';
   }
 }

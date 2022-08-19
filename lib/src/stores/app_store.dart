@@ -12,4 +12,7 @@ abstract class _AppStore with Store {
 
   @observable
   bool isLoading = false;
+
+  @observable
+  int tabIndex = 0;
 }

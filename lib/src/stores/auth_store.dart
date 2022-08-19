@@ -21,6 +21,9 @@ abstract class AuthStoreBase with Store {
   @observable
   String? name;
 
+  @observable
+  ObservableFuture<UserProfile>? userProfileFuture;
+
   final AuthApi authApi = AuthApi();
 
   @action
@@ -58,7 +61,10 @@ abstract class AuthStoreBase with Store {
 
   @action
   Future<void> getUser(String uid) async {
-    await authApi.getUser(uid);
+    final Future<UserProfile> userProfFuture = authApi.getUser(uid);
+    userProfileFuture = ObservableFuture(userProfFuture);
+    userProfile = await userProfileFuture;
+    //await authApi.getUser(uid);
   }
 
   @action

@@ -51,12 +51,19 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               );
-            } else if (appStore.auth.uid != null && appStore.auth.userProfile == null) {
+            } else if (appStore.auth.uid != null //
+                &&
+                appStore.auth.userProfile == null) {
               return const CreateProfile();
+            } else {
+              context.router.push(const DashboardRoute());
+              // Temp
+              return const Text('Loading;');
             }
-            return const Center(
-              child: Text('Redirect me / Add a button to take me somewhere else'),
-            );
+
+            //  return const Center(
+            //child: Text('Redirect me / Add a button to take me somewhere else'),
+            //);
           },
         ),
       ),
