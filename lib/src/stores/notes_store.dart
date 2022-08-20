@@ -1,4 +1,3 @@
-import 'package:crispin/crispin.dart';
 import 'package:mobx/mobx.dart';
 import 'package:potato/src/data/notes_api.dart';
 import 'package:potato/src/init/locator.dart';
@@ -31,7 +30,6 @@ abstract class NotesStoreBase with Store {
       final Future<List<Note>> notesFuture = notesApi.getUserNotes(authStore.uid!);
       userNotesFuture = ObservableFuture(notesFuture);
       userNotes = await notesFuture;
-      Crispin().info('getUserNotes response:');
     } catch (e) {
       throw Exception(e);
     }
@@ -45,7 +43,6 @@ abstract class NotesStoreBase with Store {
         description: description,
       );
       getUserNotes();
-      Crispin().info('createNote response:');
     } catch (e) {
       throw Exception(e);
     }
