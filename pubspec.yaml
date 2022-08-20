@@ -25,6 +25,7 @@ dependencies:
   json_annotation: ^4.6.0
   flutter_remix: ^0.0.3
   flutter_markdown: ^0.6.10+3
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:

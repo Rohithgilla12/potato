@@ -25,6 +25,14 @@ mixin _$ClipboardStore on ClipboardStoreBase, Store {
     });
   }
 
+  late final _$getClipboardAsyncAction =
+      AsyncAction('ClipboardStoreBase.getClipboard', context: context);
+
+  @override
+  Future<void> getClipboard() {
+    return _$getClipboardAsyncAction.run(() => super.getClipboard());
+  }
+
   @override
   String toString() {
     return '''
