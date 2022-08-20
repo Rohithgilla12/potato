@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:potato/src/screens/auth/login.dart';
 import 'package:potato/src/screens/auth/sign_up.dart';
 import 'package:potato/src/screens/dashboard/dashboard.dart';
+import 'package:potato/src/screens/dashboard/new_note_screen.dart';
 import 'package:potato/src/screens/home.dart';
 
 @MaterialAutoRouter(
@@ -24,6 +25,10 @@ import 'package:potato/src/screens/home.dart';
     AutoRoute(
       path: '/dashboard',
       page: DashboardPage,
+    ),
+    AutoRoute(
+      path: '/new-note',
+      page: NewNotePage,
     ),
   ],
 )

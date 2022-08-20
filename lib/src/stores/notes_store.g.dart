@@ -25,6 +25,37 @@ mixin _$NotesStore on NotesStoreBase, Store {
     });
   }
 
+  late final _$titleAtom = Atom(name: 'NotesStoreBase.title', context: context);
+
+  @override
+  String? get title {
+    _$titleAtom.reportRead();
+    return super.title;
+  }
+
+  @override
+  set title(String? value) {
+    _$titleAtom.reportWrite(value, super.title, () {
+      super.title = value;
+    });
+  }
+
+  late final _$descriptionAtom =
+      Atom(name: 'NotesStoreBase.description', context: context);
+
+  @override
+  String? get description {
+    _$descriptionAtom.reportRead();
+    return super.description;
+  }
+
+  @override
+  set description(String? value) {
+    _$descriptionAtom.reportWrite(value, super.description, () {
+      super.description = value;
+    });
+  }
+
   late final _$getUserNotesAsyncAction =
       AsyncAction('NotesStoreBase.getUserNotes', context: context);
 
@@ -37,15 +68,16 @@ mixin _$NotesStore on NotesStoreBase, Store {
       AsyncAction('NotesStoreBase.createNote', context: context);
 
   @override
-  Future<void> createNote({String? title, String? description}) {
-    return _$createNoteAsyncAction
-        .run(() => super.createNote(title: title, description: description));
+  Future<void> createNote() {
+    return _$createNoteAsyncAction.run(() => super.createNote());
   }
 
   @override
   String toString() {
     return '''
-userNotes: ${userNotes}
+userNotes: ${userNotes},
+title: ${title},
+description: ${description}
     ''';
   }
 }

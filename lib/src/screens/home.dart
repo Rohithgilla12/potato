@@ -2,16 +2,31 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:potato/src/app/router.gr.dart';
+import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/screens/auth/create_profile.dart';
 import 'package:potato/src/stores/app_store.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final AppStore appStore = AppStore();
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  final AppStore appStore = locator<AppStore>();
+
+  @override
+  initState() {
+    super.initState();
+
+    if (appStore.auth.userProfile != null) {
+      context.router.push(const DashboardRoute());
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home'),
@@ -56,7 +71,6 @@ class HomePage extends StatelessWidget {
                 appStore.auth.userProfile == null) {
               return const CreateProfile();
             } else {
-              context.router.push(const DashboardRoute());
               // Temp
               return const Text('Loading;');
             }

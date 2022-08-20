@@ -23,6 +23,7 @@ class NotesApi {
 
   Future<void> getUserNotes(String uid) async {
     try {
+      Crispin().info('getUserNotes uid: $uid');
       final response = await supabase.from(tableName).select().eq('uid', uid);
       Crispin().info('getUserNotes response: $response');
     } catch (e) {

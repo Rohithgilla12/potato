@@ -16,6 +16,12 @@ abstract class NotesStoreBase with Store {
   @observable
   List<Note> userNotes = [];
 
+  @observable
+  String? title;
+
+  @observable
+  String? description;
+
   @action
   Future<void> getUserNotes() async {
     try {
@@ -28,10 +34,7 @@ abstract class NotesStoreBase with Store {
   }
 
   @action
-  Future<void> createNote({
-    String? title,
-    String? description,
-  }) async {
+  Future<void> createNote() async {
     try {
       await notesApi.createNote(
         title: title,

@@ -1,25 +1,35 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:potato/src/app/router.gr.dart';
 import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/stores/app_store.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final AppStore appStore = locator<AppStore>();
+  State<DashboardPage> createState() => _DashboardPageState();
+}
 
+class _DashboardPageState extends State<DashboardPage> {
+  final AppStore appStore = locator<AppStore>();
+
+  @override
+  initState() {
+    super.initState();
+    appStore.notes.getUserNotes();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return Scaffold(
         floatingActionButton: appStore.tabIndex == 0
             ? FloatingActionButton(
                 child: const Icon(Icons.add),
-                onPressed: () async {
-                  //await appStore.notes.createNote(
-                  //title: 'New Note',
-                  //description: 'This is a new note',
-                  //);
+                onPressed: () {
+                  context.router.push(const NewNoteRoute());
                 },
               )
             : null,
@@ -40,7 +50,9 @@ class DashboardPage extends StatelessWidget {
           ],
         ),
         body: <Widget>[
+          // TODO: Get and display list of all notes
           const Text('Home'),
+          // TODO: Timer based checking of clipboard
           const Text('Profile'),
         ][appStore.tabIndex],
       );
