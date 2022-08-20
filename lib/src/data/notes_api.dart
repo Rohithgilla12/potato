@@ -1,4 +1,5 @@
 import 'package:crispin/crispin.dart';
+import 'package:potato/src/models/notes/index.dart';
 import 'package:potato/src/utils/supabase.dart';
 
 class NotesApi {
@@ -13,7 +14,6 @@ class NotesApi {
         'title': title,
         'description': description,
       });
-
       Crispin().info('createNote response: $response');
     } catch (e) {
       Crispin().error(e.toString(), error: e);
@@ -21,11 +21,12 @@ class NotesApi {
     }
   }
 
-  Future<void> getUserNotes(String uid) async {
+  Future<List<Note>> getUserNotes(String uid) async {
     try {
       Crispin().info('getUserNotes uid: $uid');
       final response = await supabase.from(tableName).select().eq('uid', uid);
       Crispin().info('getUserNotes response: $response');
+      return response.map((note) => Note.fromJson(note)).toList();
     } catch (e) {
       Crispin().error(e.toString(), error: e);
       throw Exception(e);

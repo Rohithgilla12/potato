@@ -56,6 +56,22 @@ mixin _$NotesStore on NotesStoreBase, Store {
     });
   }
 
+  late final _$userNotesFutureAtom =
+      Atom(name: 'NotesStoreBase.userNotesFuture', context: context);
+
+  @override
+  ObservableFuture<List<Note>> get userNotesFuture {
+    _$userNotesFutureAtom.reportRead();
+    return super.userNotesFuture;
+  }
+
+  @override
+  set userNotesFuture(ObservableFuture<List<Note>> value) {
+    _$userNotesFutureAtom.reportWrite(value, super.userNotesFuture, () {
+      super.userNotesFuture = value;
+    });
+  }
+
   late final _$getUserNotesAsyncAction =
       AsyncAction('NotesStoreBase.getUserNotes', context: context);
 
@@ -77,7 +93,8 @@ mixin _$NotesStore on NotesStoreBase, Store {
     return '''
 userNotes: ${userNotes},
 title: ${title},
-description: ${description}
+description: ${description},
+userNotesFuture: ${userNotesFuture}
     ''';
   }
 }

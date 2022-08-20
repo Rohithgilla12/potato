@@ -22,12 +22,16 @@ abstract class NotesStoreBase with Store {
   @observable
   String? description;
 
+  @observable
+  ObservableFuture<List<Note>> userNotesFuture = ObservableFuture.value(<Note>[]);
+
   @action
   Future<void> getUserNotes() async {
     try {
-      await notesApi.getUserNotes(authStore.uid!);
+      final Future<List<Note>> notesFuture = notesApi.getUserNotes(authStore.uid!);
+      userNotesFuture = ObservableFuture(notesFuture);
+      userNotes = await notesFuture;
       Crispin().info('getUserNotes response:');
-      //userNotes = response;
     } catch (e) {
       throw Exception(e);
     }
@@ -40,6 +44,7 @@ abstract class NotesStoreBase with Store {
         title: title,
         description: description,
       );
+      getUserNotes();
       Crispin().info('createNote response:');
     } catch (e) {
       throw Exception(e);
