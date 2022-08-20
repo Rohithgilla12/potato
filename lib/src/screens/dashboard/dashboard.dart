@@ -15,7 +15,12 @@ class DashboardPage extends StatelessWidget {
         floatingActionButton: appStore.tabIndex == 0
             ? FloatingActionButton(
                 child: const Icon(Icons.add),
-                onPressed: () async {},
+                onPressed: () async {
+                  //await appStore.notes.createNote(
+                  //title: 'New Note',
+                  //description: 'This is a new note',
+                  //);
+                },
               )
             : null,
         bottomNavigationBar: BottomNavigationBar(
