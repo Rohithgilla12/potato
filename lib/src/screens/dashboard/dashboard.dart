@@ -4,7 +4,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:potato/src/app/router.gr.dart';
 import 'package:potato/src/init/locator.dart';
-import 'package:potato/src/screens/dashboard/dashboard_notes.dart';
+import 'package:potato/src/screens/dashboard/clipboard/clipboard_list.dart';
+import 'package:potato/src/screens/dashboard/notes/dashboard_notes.dart';
 import 'package:potato/src/stores/app_store.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -21,6 +22,9 @@ class _DashboardPageState extends State<DashboardPage> {
   initState() {
     super.initState();
     appStore.notes.getUserNotes();
+    Future.delayed(const Duration(seconds: 1), () async {
+      await appStore.clipboard.listenToClipboard();
+    });
   }
 
   @override
@@ -53,8 +57,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
         body: <Widget>[
           const DashboardNotes(),
-          // TODO: Timer based checking of clipboard
-          const Text('Profile'),
+          const ClipboardListPage(),
         ][appStore.tabIndex],
       );
     });

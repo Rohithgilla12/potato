@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
 import 'package:potato/src/models/clipboard/index.dart';
@@ -11,7 +13,7 @@ abstract class ClipboardStoreBase with Store {
   final uuid = const Uuid();
 
   @observable
-  List<String> clipboard = [];
+  List<PClipboard> clipboard = [];
 
   @action
   Future<void> getClipboard() async {
@@ -23,7 +25,22 @@ abstract class ClipboardStoreBase with Store {
           id: uuid.v4(),
           text: clipboardData.text!,
         );
+
+        // Crispin().info('Clipboard data: $clipboardObject');
+
+        // Need to check recent value and if it is the same as the current value, then don't add it to the list
+        if (clipboard.isNotEmpty && clipboard.last.text == clipboardObject.text) {
+          return;
+        }
+        clipboard.add(clipboardObject);
       }
     }
+  }
+
+  @action
+  Future<void> listenToClipboard() async {
+    Timer.periodic(const Duration(seconds: 2), (timer) async {
+      await getClipboard();
+    });
   }
 }

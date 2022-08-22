@@ -13,13 +13,13 @@ mixin _$ClipboardStore on ClipboardStoreBase, Store {
       Atom(name: 'ClipboardStoreBase.clipboard', context: context);
 
   @override
-  List<String> get clipboard {
+  List<PClipboard> get clipboard {
     _$clipboardAtom.reportRead();
     return super.clipboard;
   }
 
   @override
-  set clipboard(List<String> value) {
+  set clipboard(List<PClipboard> value) {
     _$clipboardAtom.reportWrite(value, super.clipboard, () {
       super.clipboard = value;
     });
@@ -31,6 +31,14 @@ mixin _$ClipboardStore on ClipboardStoreBase, Store {
   @override
   Future<void> getClipboard() {
     return _$getClipboardAsyncAction.run(() => super.getClipboard());
+  }
+
+  late final _$listenToClipboardAsyncAction =
+      AsyncAction('ClipboardStoreBase.listenToClipboard', context: context);
+
+  @override
+  Future<void> listenToClipboard() {
+    return _$listenToClipboardAsyncAction.run(() => super.listenToClipboard());
   }
 
   @override
