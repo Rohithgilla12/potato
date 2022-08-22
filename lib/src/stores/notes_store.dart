@@ -42,7 +42,6 @@ abstract class NotesStoreBase with Store {
         title: title,
         description: description,
       );
-      getUserNotes();
     } catch (e) {
       throw Exception(e);
     }

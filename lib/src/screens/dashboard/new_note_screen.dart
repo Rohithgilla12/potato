@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/stores/app_store.dart';
 
-class NewNotePage extends StatelessWidget {
+class NewNotePage extends StatefulWidget {
   const NewNotePage({Key? key}) : super(key: key);
 
   @override
+  State<NewNotePage> createState() => _NewNotePageState();
+}
+
+class _NewNotePageState extends State<NewNotePage> {
+  final AppStore appStore = locator<AppStore>();
+
+  @override
   Widget build(BuildContext context) {
-    final AppStore appStore = locator<AppStore>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add your note'),
@@ -19,10 +25,15 @@ class NewNotePage extends StatelessWidget {
           // TODO: Add clean up and pop back after save!
           // TODO: Add loaders
           await appStore.notes.createNote();
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Note saved!'),
+              ),
+            );
+          }
+          appStore.notes.getUserNotes();
           context.router.navigateBack();
-//          final ClipboardData? clipboard =
-          //await Clipboard.getData('text/plain');
-          //Crispin().info('Clipboard data: ${clipboard?.text}');
         },
       ),
       body: Container(

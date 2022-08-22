@@ -29,7 +29,9 @@ abstract class AuthStoreBase with Store {
   @action
   void listenToAuth() {
     authSubscription = auth.onAuthStateChange((AuthChangeEvent event, Session? session) {
-      // uid = session?.user?.id;
+      if (session?.user?.id != null) {
+        getUser(session!.user!.id);
+      }
       Crispin().info('Updaing current user in listen to ${auth.currentUser?.id ?? 'No current user'}');
       Crispin().info(event.toString());
       Crispin().info(auth.currentSession?.user?.id ?? 'No session');
@@ -39,6 +41,9 @@ abstract class AuthStoreBase with Store {
       Crispin().info(event.toString());
       Crispin().info('Updaing current user in listen to ${auth.currentUser?.id ?? 'No current user'}');
       uid = auth.currentUser?.id;
+      if (uid != null) {
+        getUser(uid!);
+      }
       Crispin().info(auth.currentSession?.user?.id ?? 'No session');
       Crispin().info(auth.currentUser?.id ?? 'No current user');
     });
