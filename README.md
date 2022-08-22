@@ -2,7 +2,7 @@
 A productivity manager application, designed to sync across your devices, it currently supports macOS! 
 
 ## Demo
-![Demo](https://getkap-gifs.s3.ap-south-1.amazonaws.com/Kapture+2022-08-22+at+11.10.44.gif)
+https://user-images.githubusercontent.com/19389850/185851371-1a52c232-bd88-4e92-85fb-c48a3b3cf516.mp4
 
 ## Tools used
 - Flutter
