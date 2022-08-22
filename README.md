@@ -1,16 +1,44 @@
-# potato
+# Potato
+A productivty manager application, that designed to sync across your devices, currently supports macOS! 
 
-A new Flutter project.
+## Demo
+![Demo](https://getkap-gifs.s3.ap-south-1.amazonaws.com/Kapture+2022-08-22+at+11.10.44.gif)
 
-## Getting Started
+## Tools used
+- Flutter
+- Supabase
+- Remix Icons
+  
+P.S: This uses the `dev` version of the `supabase_flutter` pacakge.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+![Wohoo](https://c.tenor.com/cxhXkLhVpHEAAAAC/punch-it-kevin.gif)
+## Description
+### Authentication
+- Uses supabase magic link to login
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The current application dashboard mainly consists of two views
+- Notes
+- Clipboard
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Notes
+![Notes](https://i.imgur.com/qGowthZ.png)
+- Add note as a markdown.
+
+### Clipboard
+![Clipboard](https://i.imgur.com/2Oexecp.png)
+- Syncs system clipboard with the application.
+- Syncs system clipboard to supabase.
+
+## Current improvement areas
+- Make UI look neat
+- Add ability to edit / delete notes
+- More abilities for user to sign in
+- Better icons
+- Add potato logo!
+
+## Future ideas
+- Make it compatible with linux and windows.
+- Create an mobile application for the same, that would allow to sync across devices. 
+- Public API for users to play with it.
+- Market place to add "micro applications" to the application.
