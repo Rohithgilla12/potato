@@ -26,7 +26,12 @@ class NotesApi {
       Crispin().info('getUserNotes uid: $uid');
       final response = await supabase.from(tableName).select().eq('uid', uid);
       Crispin().info('getUserNotes response: $response');
-      return response.map((note) => Note.fromJson(note)).toList();
+      final List<Note> notes = [];
+      response.forEach((note) {
+        final Note noteSerialise = Note.fromJson(note);
+        notes.add(noteSerialise);
+      });
+      return notes;
     } catch (e) {
       Crispin().error(e.toString(), error: e);
       throw Exception(e);

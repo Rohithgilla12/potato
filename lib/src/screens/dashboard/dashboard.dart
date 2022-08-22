@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:potato/src/app/router.gr.dart';
 import 'package:potato/src/init/locator.dart';
+import 'package:potato/src/screens/dashboard/dashboard_notes.dart';
 import 'package:potato/src/stores/app_store.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -28,7 +30,7 @@ class _DashboardPageState extends State<DashboardPage> {
         floatingActionButton: appStore.tabIndex == 0
             ? FloatingActionButton(
                 child: const Icon(Icons.add),
-                onPressed: () {
+                onPressed: () async {
                   context.router.push(const NewNoteRoute());
                 },
               )
@@ -40,18 +42,17 @@ class _DashboardPageState extends State<DashboardPage> {
           },
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(FlutterRemix.booklet_line),
               label: 'Notes',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: Icon(FlutterRemix.clipboard_line),
+              label: 'Clipboard',
             ),
           ],
         ),
         body: <Widget>[
-          // TODO: Get and display list of all notes
-          const Text('Home'),
+          const DashboardNotes(),
           // TODO: Timer based checking of clipboard
           const Text('Profile'),
         ][appStore.tabIndex],
