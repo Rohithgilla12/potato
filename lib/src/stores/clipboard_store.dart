@@ -26,13 +26,12 @@ abstract class ClipboardStoreBase with Store {
           text: clipboardData.text!,
         );
 
-        // Crispin().info('Clipboard data: $clipboardObject');
-
         // Need to check recent value and if it is the same as the current value, then don't add it to the list
         if (clipboard.isNotEmpty && clipboard.last.text == clipboardObject.text) {
           return;
         }
-        clipboard.add(clipboardObject);
+        // Ah very weird but doing this would reload :(
+        clipboard = [...clipboard, clipboardObject];
       }
     }
   }
