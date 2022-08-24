@@ -48,22 +48,11 @@ class _HomePageState extends State<HomePage> {
                     child: Text(
                         'If you are redirected from login page, please click on the email link to complete the sign up process.'),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      ElevatedButton(
-                        onPressed: () {
-                          context.router.push(const LoginRoute());
-                        },
-                        child: const Text('Login'),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          context.router.push(const SignUpRoute());
-                        },
-                        child: const Text('Sign Up'),
-                      ),
-                    ],
+                  ElevatedButton(
+                    onPressed: () {
+                      context.router.push(const LoginRoute());
+                    },
+                    child: const Text('Login'),
                   ),
                 ],
               );

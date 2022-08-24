@@ -88,6 +88,14 @@ mixin _$NotesStore on NotesStoreBase, Store {
     return _$createNoteAsyncAction.run(() => super.createNote());
   }
 
+  late final _$deleteNoteAsyncAction =
+      AsyncAction('NotesStoreBase.deleteNote', context: context);
+
+  @override
+  Future<void> deleteNote(String id) {
+    return _$deleteNoteAsyncAction.run(() => super.deleteNote(id));
+  }
+
   @override
   String toString() {
     return '''
