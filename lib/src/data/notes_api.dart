@@ -37,4 +37,12 @@ class NotesApi {
       throw Exception(e);
     }
   }
+
+  Future<void> deleteNote(String noteId) async {
+    try {
+      await supabase.from(tableName).delete().eq('id', noteId);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

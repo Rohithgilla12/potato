@@ -26,6 +26,7 @@ dependencies:
   flutter_remix: ^0.0.3
   flutter_markdown: ^0.6.10+3
   uuid: ^3.0.6
+  flutter_secure_storage: ^6.0.0
 
 dev_dependencies:
   flutter_test:

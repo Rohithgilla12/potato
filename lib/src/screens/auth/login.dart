@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/layouts/auth_layout.dart';
@@ -31,6 +32,12 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text('Send magic link'),
               onPressed: () async {
                 await appStore.auth.loginWithMagicLink(_emailController.text);
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Magic link sent'),
+                  ));
+                }
+                context.router.navigateBack();
               },
             ),
           ],

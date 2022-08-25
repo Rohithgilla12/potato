@@ -19,6 +19,7 @@ class DashboardNotes extends StatelessWidget {
           return ListView.separated(
             separatorBuilder: (context, index) => const Divider(),
             itemCount: appStore.notes.userNotes.length,
+            reverse: true,
             itemBuilder: (context, index) {
               final note = appStore.notes.userNotes[index];
               return ListTile(
@@ -30,6 +31,29 @@ class DashboardNotes extends StatelessWidget {
                 onTap: () {
                   context.router.push(NoteDetailRoute(id: note.id));
                 },
+                trailing: SizedBox(
+                  width: 80.0,
+                  child: Row(
+                    children: <Widget>[
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('TODO: Implement edit note'),
+                            ),
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () async {
+                          await appStore.notes.deleteNote(note.id);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               );
             },
           );

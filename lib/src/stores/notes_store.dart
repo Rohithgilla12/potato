@@ -42,7 +42,18 @@ abstract class NotesStoreBase with Store {
         title: title,
         description: description,
       );
-      getUserNotes();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  @action
+  Future<void> deleteNote(String id) async {
+    try {
+      await notesApi.deleteNote(id);
+
+      // Till we implement the realtime listening, refreshing the list is the easiest way to update the list
+      await getUserNotes();
     } catch (e) {
       throw Exception(e);
     }
