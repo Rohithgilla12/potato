@@ -5,6 +5,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger_crispin_transport/logger_crispin_transport.dart';
 import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/stores/app_store.dart';
+import 'package:potato/src/stores/auth_provider.dart';
 import 'package:potato/src/utils/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

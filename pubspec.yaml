@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ">=2.18.0-271.4.beta <3.0.0"
@@ -27,6 +27,8 @@ dependencies:
   flutter_markdown: ^0.6.10+3
   uuid: ^3.0.6
   flutter_secure_storage: ^6.0.0
+  hooks_riverpod: ^1.0.4
+  flutter_hooks: ^0.18.5+1
 
 dev_dependencies:
   flutter_test:

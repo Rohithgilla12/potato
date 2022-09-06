@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:potato/src/app/router.gr.dart';
 import 'package:potato/src/init/init.dart';
+import 'package:potato/src/utils/riverpod_logger.dart';
 
 void main() async {
   await init();
@@ -14,11 +16,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Potato',
-      routerDelegate: appRouter.delegate(),
-      routeInformationParser: appRouter.defaultRouteParser(),
-      theme: ThemeData.dark(),
+    return ProviderScope(
+      observers: [RiverpodLogger()],
+      child: MaterialApp.router(
+        title: 'Potato',
+        routerDelegate: appRouter.delegate(),
+        routeInformationParser: appRouter.defaultRouteParser(),
+        theme: ThemeData.dark(),
+      ),
     );
   }
 }

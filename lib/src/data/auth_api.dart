@@ -1,6 +1,11 @@
 import 'package:crispin/crispin.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:potato/src/models/auth/index.dart';
 import 'package:potato/src/utils/supabase.dart';
+
+final authApiProvider = Provider<AuthApi>((ref) {
+  return AuthApi();
+});
 
 class AuthApi {
   Future<UserProfile> getUser(String uid) async {
