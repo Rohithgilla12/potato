@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:potato/src/app/guards/auth_guard.dart';
 import 'package:potato/src/app/router.gr.dart';
 import 'package:potato/src/init/init.dart';
 import 'package:potato/src/utils/riverpod_logger.dart';
@@ -9,7 +10,9 @@ void main() async {
   runApp(const MyApp());
 }
 
-final AppRouter appRouter = AppRouter();
+final AppRouter appRouter = AppRouter(
+  authGuard: AuthGuard(),
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

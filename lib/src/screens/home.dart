@@ -34,7 +34,8 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () async {
-          await appStore.auth.getUser(appStore.auth.uid!);
+          context.router.replaceAll([const DashboardRoute()]);
+          // await appStore.auth.getUser(appStore.auth.uid!);
         },
       ),
       body: Padding(
@@ -45,8 +46,7 @@ class _HomePageState extends State<HomePage> {
               return Column(
                 children: [
                   const Center(
-                    child: Text(
-                        'If you are redirected from login page, please click on the email link to complete the sign up process.'),
+                    child: Text('If you are redirected from login page, please click on the email link to complete the sign up process.'),
                   ),
                   ElevatedButton(
                     onPressed: () {

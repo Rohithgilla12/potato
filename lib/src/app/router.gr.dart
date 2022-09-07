@@ -20,10 +20,15 @@ import '../screens/dashboard/dashboard.dart' as _i4;
 import '../screens/dashboard/new_note_screen.dart' as _i5;
 import '../screens/dashboard/notes/note_detail_page.dart' as _i6;
 import '../screens/home.dart' as _i1;
+import 'guards/auth_guard.dart' as _i9;
 
 class AppRouter extends _i7.RootStackRouter {
-  AppRouter([_i8.GlobalKey<_i8.NavigatorState>? navigatorKey])
+  AppRouter(
+      {_i8.GlobalKey<_i8.NavigatorState>? navigatorKey,
+      required this.authGuard})
       : super(navigatorKey);
+
+  final _i9.AuthGuard authGuard;
 
   @override
   final Map<String, _i7.PageFactory> pagesMap = {
@@ -62,7 +67,8 @@ class AppRouter extends _i7.RootStackRouter {
         _i7.RouteConfig(HomeRoute.name, path: '/'),
         _i7.RouteConfig(LoginRoute.name, path: '/login'),
         _i7.RouteConfig(SignUpRoute.name, path: '/sign-up'),
-        _i7.RouteConfig(DashboardRoute.name, path: '/dashboard'),
+        _i7.RouteConfig(DashboardRoute.name,
+            path: '/dashboard', guards: [authGuard]),
         _i7.RouteConfig(NewNoteRoute.name, path: '/new-note'),
         _i7.RouteConfig(NoteDetailRoute.name, path: '/note-detail/:id')
       ];
