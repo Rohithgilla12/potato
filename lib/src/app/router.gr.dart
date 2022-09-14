@@ -69,8 +69,10 @@ class AppRouter extends _i7.RootStackRouter {
         _i7.RouteConfig(SignUpRoute.name, path: '/sign-up'),
         _i7.RouteConfig(DashboardRoute.name,
             path: '/dashboard', guards: [authGuard]),
-        _i7.RouteConfig(NewNoteRoute.name, path: '/new-note'),
-        _i7.RouteConfig(NoteDetailRoute.name, path: '/note-detail/:id')
+        _i7.RouteConfig(NewNoteRoute.name,
+            path: '/new-note', guards: [authGuard]),
+        _i7.RouteConfig(NoteDetailRoute.name,
+            path: '/note-detail/:id', guards: [authGuard])
       ];
 }
 

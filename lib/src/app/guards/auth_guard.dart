@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:crispin/crispin.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:potato/src/stores/auth_provider.dart';
+import 'package:potato/src/init/init.dart';
 
 class AuthGuard extends AutoRouteGuard {
   @override

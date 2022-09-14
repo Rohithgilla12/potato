@@ -2,7 +2,9 @@ import 'package:crispin/crispin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger_crispin_transport/logger_crispin_transport.dart';
+import 'package:potato/src/data/auth_api.dart';
 import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/stores/app_store.dart';
 import 'package:potato/src/stores/auth_provider.dart';
@@ -33,6 +35,8 @@ class SecureLocalStorage extends LocalStorage {
         );
 }
 
+late StateProvider<String?> uidProvider;
+
 Future<void> init() async {
   await dotenv.load();
 
@@ -62,11 +66,20 @@ Future<void> init() async {
     ),
   ));
 
-  appStore.auth.listenToAuth();
+  // appStore.auth.listenToAuth();
 
   // Hacky way to do for now.
-  appStore.auth.uid = auth.currentSession?.user?.id;
-  if (appStore.auth.uid != null) {
-    await appStore.auth.getUser(appStore.auth.uid!);
-  }
+  uidProvider = StateProvider<String?>((ref) {
+    final String? uid = auth.currentSession?.user?.id;
+    if (uid != null) {
+      ref.read(authApiProvider).getUser(uid);
+    }
+    ref.read(authControllerProvider.notifier).listenToAuth();
+    return auth.currentSession?.user?.id;
+  });
+
+  // appStore.auth.uid = auth.currentSession?.user?.id;
+  // if (appStore.auth.uid != null) {
+  //   await appStore.auth.getUser(appStore.auth.uid!);
+  // }
 }
