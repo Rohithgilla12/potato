@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger_crispin_transport/logger_crispin_transport.dart';
 import 'package:potato/src/data/auth_api.dart';
 import 'package:potato/src/init/locator.dart';
-import 'package:potato/src/stores/app_store.dart';
 import 'package:potato/src/stores/auth_provider.dart';
 import 'package:potato/src/utils/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -57,7 +56,7 @@ Future<void> init() async {
 
   setupLocator();
 
-  final AppStore appStore = locator<AppStore>();
+  // final AppStore appStore = locator<AppStore>();
 
   // Setup loggers
   Crispin().addTransport(LoggerCrispinTransport(
