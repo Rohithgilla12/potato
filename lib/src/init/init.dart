@@ -8,6 +8,7 @@ import 'package:potato/src/data/auth_api.dart';
 import 'package:potato/src/init/locator.dart';
 import 'package:potato/src/stores/auth_provider.dart';
 import 'package:potato/src/utils/supabase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // user flutter_secure_storage to persist user session
@@ -36,7 +37,7 @@ class SecureLocalStorage extends LocalStorage {
 
 late StateProvider<String?> uidProvider;
 
-Future<void> init() async {
+Future<SharedPreferences> init() async {
   await dotenv.load();
 
   final String? supbaseUrl = dotenv.maybeGet('SUPABASE_URL');
@@ -76,6 +77,7 @@ Future<void> init() async {
     ref.read(authControllerProvider.notifier).listenToAuth();
     return auth.currentSession?.user?.id;
   });
+  return await SharedPreferences.getInstance();
 
   // appStore.auth.uid = auth.currentSession?.user?.id;
   // if (appStore.auth.uid != null) {
